@@ -362,7 +362,7 @@ function Hero() {
                 <div className="floating absolute inset-0">
                   <div className="absolute inset-0 rounded-[40%] bg-gradient-to-br from-[#F97316] to-[#D9534F] shadow-[0_20px_50px_-20px_rgba(217,83,79,0.7)]" />
                   <img
-                    src="/assets/hero-tender.png"
+                    src="/assets/hero.png"
                     alt="Tender Tipz & Jo"
                     loading="eager"
                     className="absolute inset-0 h-full w-full object-contain drop-shadow-[0_20px_20px_rgba(26,20,18,0.3)]"
@@ -508,7 +508,7 @@ function Hero() {
                     <div className="absolute inset-[6%] rounded-[42%] bg-gradient-to-br from-[#F97316] to-[#D9534F] opacity-95 shadow-[0_40px_80px_-30px_rgba(217,83,79,0.7)]" />
                     <div className="absolute inset-[14%] rounded-[48%] bg-[#EAB308]/40 mix-blend-multiply blur-sm" />
                     <img
-                      src="/assets/hero-tender.png"
+                      src="/assets/hero.png"
                       alt="Tender croustillant Tipz & Jo"
                       loading="eager"
                       className="absolute inset-0 h-full w-full object-contain drop-shadow-[0_40px_40px_rgba(26,20,18,0.35)]"
@@ -579,7 +579,7 @@ function Concept() {
               transition={spring}
               className="grain relative overflow-hidden rounded-3xl bg-[#F4EEE1] p-3 shadow-juicy ring-1 ring-black/5 md:p-4"
             >
-              <img src="/assets/tenders.png" alt="Tenders maison" loading="lazy" className="aspect-[5/4] w-full rounded-2xl object-cover" />
+              <img src="/assets/concept.png" alt="Concept Tipz & Jo" loading="lazy" className="aspect-[5/4] w-full rounded-2xl object-cover" />
               <div className="absolute left-5 top-5">
                 <MaisonBadge />
               </div>
