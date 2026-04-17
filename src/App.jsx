@@ -12,12 +12,12 @@ const springSoft = { type: "spring", stiffness: 180, damping: 22 };
    Menu data
 ───────────────────────────────────────────── */
 const MENU = [
-  { name: "Tenders & Cheddar Drop", price: "9,90",  img: "/assets/menu-tenders-cheddar-drop.png", tag: "Signature",       desc: "Tenders marinés 24h, cheddar fondu qui coule." },
-  { name: "Wings Signature",        price: "10,90", img: "/assets/menu-signature-wings.png",      tag: "Spicy",           desc: "Ailes croustillantes, sauce maison braisée." },
-  { name: "The Fresh Crunch",       price: "8,90",  img: "/assets/menu-fresh-crunch-wrap.png",    tag: "Fresh",           desc: "Wrap généreux, crunch et sauce onctueuse." },
-  { name: "Le Tacos Signature",     price: "9,50",  img: "/assets/menu-signature-tacos.png",      tag: "Sans frites ded.", desc: "Galette grillée, poulet croustillant, sauce fromagère." },
-  { name: "The Banger Burger",      price: "12,90", img: "/assets/menu-banger-burger.png",        tag: "Bestseller",      desc: "Bun brioché, double crunch, oignons frits, BBQ maison." },
-  { name: "Nos Sides",              price: "4,50",  img: "/assets/menu-wavy-fries.png",           tag: "Frites ondulées", desc: "Ondulées dorées, sel fumé, sauce au choix." },
+  { name: "Tenders & Cheddar Drop", price: "9,90",  img: "/assets/tenders.png", tag: "Signature",        desc: "Tenders marinés 24h, cheddar fondu qui coule." },
+  { name: "Wings Signature",        price: "10,90", img: "/assets/wings.png",   tag: "Spicy",            desc: "Ailes croustillantes, sauce maison braisée." },
+  { name: "The Fresh Crunch",       price: "8,90",  img: "/assets/wrap.png",    tag: "Fresh",            desc: "Wrap généreux, crunch et sauce onctueuse." },
+  { name: "Le Tacos Signature",     price: "9,50",  img: "/assets/tacos.png",   tag: "Sans frites ded.", desc: "Galette grillée, poulet croustillant, sauce fromagère." },
+  { name: "The Banger Burger",      price: "12,90", img: "/assets/burger.png",  tag: "Bestseller",       desc: "Bun brioché, double crunch, oignons frits, BBQ maison." },
+  { name: "Nos Sides",              price: "4,50",  img: "/assets/fries.png",   tag: "Frites ondulées",  desc: "Ondulées dorées, sel fumé, sauce au choix." },
 ];
 
 /* ─────────────────────────────────────────────
@@ -62,13 +62,14 @@ const TikTokIcon = () => (
 );
 
 const SnapchatIcon = () => (
-  <svg viewBox="0 0 24 24" className="h-full w-full">
-    <rect width="24" height="24" rx="6" fill="#FFFC00" />
-    <path
-      fill="#000"
-      d="M12 4.5c-2.2 0-4 1.8-4 4v.75c-.28.07-.75.32-.75.93s.38.88.72.93c-.04.28-.2 1-.78 1.63l-.01.01c-.23.25-.09.52.16.58.62.15 1.25.4 1.52.82.06.1.1.2.12.31.02.1-.03.22-.13.29-.24.13-.58.2-1.03.2-.3 0-.57-.04-.74-.08-.18-.04-.35.07-.39.24-.04.18.06.36.24.4.22.06.47.12.71.17.29.06.48.21.58.46.07.17.19.45 1.91.45s1.84-.28 1.91-.45c.1-.25.29-.4.58-.46.24-.05.49-.11.71-.17.18-.04.28-.22.24-.4-.04-.17-.21-.28-.39-.24-.17.04-.44.08-.74.08-.45 0-.79-.07-1.03-.2-.1-.07-.15-.19-.13-.29.02-.11.06-.21.12-.31.27-.42.9-.67 1.52-.82.25-.06.39-.33.16-.58l-.01-.01c-.58-.63-.74-1.35-.78-1.63.34-.05.72-.32.72-.93s-.47-.86-.75-.93V8.5c0-2.2-1.8-4-4-4z"
+  <div className="grid h-full w-full place-items-center rounded-xl bg-[#FFFC00]">
+    <img
+      src="/assets/snapchat-ghost-logo.svg"
+      alt=""
+      aria-hidden="true"
+      className="h-[72%] w-[72%] object-contain"
     />
-  </svg>
+  </div>
 );
 
 const SOCIAL_LINKS = [
@@ -78,8 +79,20 @@ const SOCIAL_LINKS = [
 ];
 
 const DELIVERY_PARTNERS = [
-  { name: "Uber Eats", tag: "Livraison rapide",  grad: "from-[#06C167] to-[#0A8E4A]", symbol: "Eats" },
-  { name: "Deliveroo", tag: "Livraison premium", grad: "from-[#00CCBC] to-[#008F85]", symbol: "roo"  },
+  {
+    name: "Uber Eats",
+    tag: "Livraison rapide",
+    grad: "from-[#06C167] to-[#0A8E4A]",
+    logo: "/assets/uber-eats-logo.svg",
+    logoAlt: "Logo officiel Uber Eats",
+  },
+  {
+    name: "Deliveroo",
+    tag: "Livraison premium",
+    grad: "from-[#00CCBC] to-[#008F85]",
+    logo: "/assets/deliveroo-logo.svg",
+    logoAlt: "Logo officiel Deliveroo",
+  },
 ];
 
 /* ─────────────────────────────────────────────
@@ -349,7 +362,7 @@ function Hero() {
                 <div className="floating absolute inset-0">
                   <div className="absolute inset-0 rounded-[40%] bg-gradient-to-br from-[#F97316] to-[#D9534F] shadow-[0_20px_50px_-20px_rgba(217,83,79,0.7)]" />
                   <img
-                    src="/assets/hero-crispy-tender.png"
+                    src="/assets/hero-tender.png"
                     alt="Tender Tipz & Jo"
                     loading="eager"
                     className="absolute inset-0 h-full w-full object-contain drop-shadow-[0_20px_20px_rgba(26,20,18,0.3)]"
@@ -495,7 +508,7 @@ function Hero() {
                     <div className="absolute inset-[6%] rounded-[42%] bg-gradient-to-br from-[#F97316] to-[#D9534F] opacity-95 shadow-[0_40px_80px_-30px_rgba(217,83,79,0.7)]" />
                     <div className="absolute inset-[14%] rounded-[48%] bg-[#EAB308]/40 mix-blend-multiply blur-sm" />
                     <img
-                      src="/assets/hero-crispy-tender.png"
+                      src="/assets/hero-tender.png"
                       alt="Tender croustillant Tipz & Jo"
                       loading="eager"
                       className="absolute inset-0 h-full w-full object-contain drop-shadow-[0_40px_40px_rgba(26,20,18,0.35)]"
@@ -566,7 +579,7 @@ function Concept() {
               transition={spring}
               className="grain relative overflow-hidden rounded-3xl bg-[#F4EEE1] p-3 shadow-juicy ring-1 ring-black/5 md:p-4"
             >
-              <img src="/assets/menu-tenders-cheddar-drop.png" alt="Tenders maison" loading="lazy" className="aspect-[5/4] w-full rounded-2xl object-cover" />
+              <img src="/assets/tenders.png" alt="Tenders maison" loading="lazy" className="aspect-[5/4] w-full rounded-2xl object-cover" />
               <div className="absolute left-5 top-5">
                 <MaisonBadge />
               </div>
@@ -780,8 +793,12 @@ function Livraison() {
                     Commander <span aria-hidden>→</span>
                   </div>
                 </div>
-                <div className="hidden h-20 w-20 place-items-center rounded-2xl bg-white/20 font-[Fredoka] text-2xl font-bold backdrop-blur sm:grid md:h-28 md:w-28 md:rounded-3xl md:text-3xl">
-                  {p.symbol}
+                <div className="hidden h-20 w-24 place-items-center rounded-2xl border border-white/40 bg-white/88 p-3 shadow-[0_18px_35px_-18px_rgba(0,0,0,0.35)] backdrop-blur sm:grid md:h-28 md:w-36 md:rounded-3xl md:p-4">
+                  <img
+                    src={p.logo}
+                    alt={p.logoAlt}
+                    className="max-h-8 max-w-[72px] object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.08)] md:max-h-10 md:max-w-[112px]"
+                  />
                 </div>
               </div>
             </motion.a>
