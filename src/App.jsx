@@ -8,6 +8,59 @@ import { motion, useScroll, useTransform, useReducedMotion, AnimatePresence } fr
 const spring     = { type: "spring", stiffness: 260, damping: 20 };
 const springSoft = { type: "spring", stiffness: 180, damping: 22 };
 
+const PARIS_TIME_FORMATTER = new Intl.DateTimeFormat("en-US", {
+  timeZone: "Europe/Paris",
+  weekday: "short",
+  hour: "2-digit",
+  minute: "2-digit",
+  hourCycle: "h23",
+});
+
+const WEEKDAY_TO_INDEX = {
+  Sun: 0,
+  Mon: 1,
+  Tue: 2,
+  Wed: 3,
+  Thu: 4,
+  Fri: 5,
+  Sat: 6,
+};
+
+const OPENING_HOURS = {
+  0: [{ start: 18 * 60 + 30, end: 23 * 60 }],
+  1: [{ start: 11 * 60, end: 23 * 60 + 30 }],
+  2: [{ start: 11 * 60, end: 23 * 60 + 30 }],
+  3: [{ start: 11 * 60, end: 23 * 60 + 30 }],
+  4: [{ start: 11 * 60, end: 23 * 60 + 30 }],
+  5: [{ start: 11 * 60, end: 25 * 60 }],
+  6: [{ start: 11 * 60, end: 25 * 60 }],
+};
+
+function getParisOpenStatus(now = new Date()) {
+  const parts = Object.fromEntries(
+    PARIS_TIME_FORMATTER
+      .formatToParts(now)
+      .filter((part) => part.type !== "literal")
+      .map((part) => [part.type, part.value])
+  );
+
+  const dayIndex = WEEKDAY_TO_INDEX[parts.weekday];
+  const minutes = Number(parts.hour) * 60 + Number(parts.minute);
+  const todaysHours = OPENING_HOURS[dayIndex] ?? [];
+  const previousDayHours = OPENING_HOURS[(dayIndex + 6) % 7] ?? [];
+
+  const isOpenToday = todaysHours.some(({ start, end }) => {
+    if (end > 24 * 60) return minutes >= start;
+    return minutes >= start && minutes < end;
+  });
+
+  const isOpenFromPreviousDay = previousDayHours.some(
+    ({ end }) => end > 24 * 60 && minutes < end - 24 * 60
+  );
+
+  return isOpenToday || isOpenFromPreviousDay;
+}
+
 /* ─────────────────────────────────────────────
    Menu data
 ───────────────────────────────────────────── */
@@ -245,6 +298,16 @@ function MobileBottomBar() {
    NAV — logo + desktop links + mobile CTA chip
 ───────────────────────────────────────────── */
 function Nav() {
+  const [isOpen, setIsOpen] = useState(() => getParisOpenStatus());
+
+  useEffect(() => {
+    const updateOpenStatus = () => setIsOpen(getParisOpenStatus());
+    updateOpenStatus();
+
+    const intervalId = window.setInterval(updateOpenStatus, 60_000);
+    return () => window.clearInterval(intervalId);
+  }, []);
+
   return (
     <motion.nav
       initial={{ y: -30, opacity: 0 }}
@@ -284,8 +347,8 @@ function Nav() {
       {/* Mobile-only: location pill + open hours */}
       <div className="flex items-center gap-2 md:hidden">
         <span className="inline-flex items-center gap-1.5 rounded-full border border-[#1A1412]/10 bg-white/60 px-3 py-1.5 text-xs font-semibold backdrop-blur">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#22c55e]" />
-          Ouvert
+          <span className={`h-1.5 w-1.5 rounded-full ${isOpen ? "animate-pulse bg-[#22c55e]" : "bg-[#ef4444]"}`} />
+          {isOpen ? "Ouvert" : "Fermé"}
         </span>
       </div>
     </motion.nav>
@@ -841,14 +904,28 @@ function Footer() {
         {/* Address + Hours */}
         <div>
           <h3 className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "#EAB308" }}>Adresse</h3>
-          <p className="mt-3 text-sm leading-relaxed" style={{ color: "rgba(253,251,247,0.85)" }}>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=41+place+du+Ch%C3%A2telet+Orl%C3%A9ans"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 inline-block text-sm leading-relaxed transition-opacity hover:opacity-80"
+            style={{ color: "rgba(253,251,247,0.85)" }}
+          >
             41 place du Châtelet<br />Orléans
-          </p>
+          </a>
+          <h3 className="mt-7 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "#EAB308" }}>Appel-nous</h3>
+          <a
+            href="tel:+33238000000"
+            className="mt-3 inline-block text-sm leading-relaxed transition-opacity hover:opacity-80"
+            style={{ color: "rgba(253,251,247,0.85)" }}
+          >
+            02 38 00 00 00
+          </a>
           <h3 className="mt-7 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "#EAB308" }}>Horaires</h3>
           <ul className="mt-3 space-y-1.5 text-sm" style={{ color: "rgba(253,251,247,0.85)" }}>
-            <li>Lun – Jeu · 11h30 – 22h30</li>
-            <li>Ven – Sam · 11h30 – 00h00</li>
-            <li>Dimanche · 18h – 22h30</li>
+            <li>Lun – Jeu · 11h00 – 23h30</li>
+            <li>Ven – Sam · 11h00 – 01h00</li>
+            <li>Dimanche · 18h30 – 23h00</li>
           </ul>
         </div>
 
