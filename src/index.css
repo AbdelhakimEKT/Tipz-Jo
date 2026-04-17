@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FDFBF7;
+  --color-cream-deep: #F4EEE1;
+  --color-terracotta: #D9534F;
+  --color-terracotta-deep: #B8433F;
+  --color-yellow-pop: #EAB308;
+  --color-orange-pop: #F97316;
+  --color-ink: #1A1412;
+
+  --font-display: "Fredoka", "Nunito", system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+}
+
+:root {
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Magnetic button glow */
+.magnetic-btn {
+  position: relative;
+  isolation: isolate;
+}
+.magnetic-btn::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(120deg, #F97316, #EAB308, #D9534F);
+  filter: blur(14px);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+.magnetic-btn:hover::before {
+  opacity: 0.55;
+}
+
+/* Soft premium shadow */
+.shadow-juicy {
+  box-shadow:
+    0 1px 2px rgba(26, 20, 18, 0.04),
+    0 10px 30px -10px rgba(217, 83, 79, 0.18),
+    0 30px 60px -30px rgba(26, 20, 18, 0.18);
+}
+
+/* Grain overlay */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: multiply;
+  opacity: 0.35;
+  border-radius: inherit;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+.marquee-track {
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+
+/* Floating hero */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-18px) rotate(2deg); }
+}
+.floating {
+  animation: float-y 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Headings */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+/* Selection */
+::selection {
+  background: #F97316;
+  color: #FDFBF7;
+}
