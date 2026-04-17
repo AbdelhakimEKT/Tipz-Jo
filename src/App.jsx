@@ -12,12 +12,12 @@ const springSoft = { type: "spring", stiffness: 180, damping: 22 };
    Menu data
 ───────────────────────────────────────────── */
 const MENU = [
-  { name: "Tenders & Cheddar Drop", price: "9,90",  img: "/assets/tenders.png", tag: "Signature",        desc: "Tenders marinés 24h, cheddar fondu qui coule." },
-  { name: "Wings Signature",         price: "10,90", img: "/assets/wings.png",   tag: "Spicy",            desc: "Ailes croustillantes, sauce maison braisée." },
-  { name: "The Fresh Crunch",        price: "8,90",  img: "/assets/wrap.png",    tag: "Fresh",            desc: "Wrap généreux, crunch et sauce onctueuse." },
-  { name: "Le Tacos Signature",      price: "9,50",  img: "/assets/tacos.png",   tag: "Sans frites ded.", desc: "Galette grillée, poulet croustillant, sauce fromagère." },
-  { name: "The Banger Burger",       price: "12,90", img: "/assets/burger.png",  tag: "Bestseller",       desc: "Bun brioché, double crunch, oignons frits, BBQ maison." },
-  { name: "Nos Sides",               price: "4,50",  img: "/assets/fries.png",   tag: "Frites ondulées",  desc: "Ondulées dorées, sel fumé, sauce au choix." },
+  { name: "Tenders & Cheddar Drop", price: "9,90",  img: "/assets/menu-tenders-cheddar-drop.png", tag: "Signature",        desc: "Tenders marinés 24h, cheddar fondu qui coule." },
+  { name: "Wings Signature",        price: "10,90", img: "/assets/menu-signature-wings.png",      tag: "Spicy",            desc: "Ailes croustillantes, sauce maison braisée." },
+  { name: "The Fresh Crunch",       price: "8,90",  img: "/assets/menu-fresh-crunch-wrap.png",    tag: "Fresh",            desc: "Wrap généreux, crunch et sauce onctueuse." },
+  { name: "Le Tacos Signature",     price: "9,50",  img: "/assets/menu-signature-tacos.png",      tag: "Sans frites ded.", desc: "Galette grillée, poulet croustillant, sauce fromagère." },
+  { name: "The Banger Burger",      price: "12,90", img: "/assets/menu-banger-burger.png",        tag: "Bestseller",       desc: "Bun brioché, double crunch, oignons frits, BBQ maison." },
+  { name: "Nos Sides",              price: "4,50",  img: "/assets/menu-wavy-fries.png",           tag: "Frites ondulées",  desc: "Ondulées dorées, sel fumé, sauce au choix." },
 ];
 
 /* ─────────────────────────────────────────────
@@ -66,7 +66,7 @@ const TikTokIcon = () => (
 const SnapchatIcon = () => (
   <div className="grid h-full w-full place-items-center rounded-xl bg-[#FFFC00]">
     <img
-      src="/assets/snapchat-ghost-logo.svg"
+      src="/assets/brand-snapchat-ghost.svg"
       alt=""
       aria-hidden="true"
       className="h-[72%] w-[72%] object-contain"
@@ -74,10 +74,27 @@ const SnapchatIcon = () => (
   </div>
 );
 
-const SOCIALS = [
-  { name: "Instagram", handle: "@tipzandjo", Icon: InstagramIcon, bg: "bg-gradient-to-br from-[#f09433] via-[#e6683c] via-[#dc2743] via-[#cc2366] to-[#bc1888]" },
-  { name: "TikTok",    handle: "@tipzandjo", Icon: TikTokIcon,    bg: "bg-[#010101]" },
-  { name: "Snapchat",  handle: "tipzandjo",  Icon: SnapchatIcon,  bg: "bg-[#FFFC00]" },
+const SOCIAL_LINKS = [
+  { name: "Instagram", handle: "@tipzandjo", Icon: InstagramIcon },
+  { name: "TikTok",    handle: "@tipzandjo", Icon: TikTokIcon },
+  { name: "Snapchat",  handle: "tipzandjo",  Icon: SnapchatIcon },
+];
+
+const DELIVERY_PARTNERS = [
+  {
+    name: "Uber Eats",
+    tag: "Livraison rapide",
+    grad: "from-[#06C167] to-[#0A8E4A]",
+    logo: "/assets/brand-uber-eats-wordmark.svg",
+    logoAlt: "Logo officiel Uber Eats",
+  },
+  {
+    name: "Deliveroo",
+    tag: "Livraison premium",
+    grad: "from-[#00CCBC] to-[#008F85]",
+    logo: "/assets/brand-deliveroo-wordmark.svg",
+    logoAlt: "Logo officiel Deliveroo",
+  },
 ];
 
 /* ─────────────────────────────────────────────
@@ -232,7 +249,7 @@ function Hero() {
                   <div className="absolute inset-[6%] rounded-[42%] bg-gradient-to-br from-[#F97316] to-[#D9534F] opacity-95 shadow-[0_40px_80px_-30px_rgba(217,83,79,0.7)]" />
                   <div className="absolute inset-[14%] rounded-[48%] bg-[#EAB308]/40 mix-blend-multiply blur-sm" />
                   <img
-                    src="/assets/hero-tender.png"
+                    src="/assets/hero-crispy-tender.png"
                     alt="Tender croustillant Tipz & Jo"
                     loading="eager"
                     className="absolute inset-0 h-full w-full object-contain drop-shadow-[0_40px_40px_rgba(26,20,18,0.35)]"
@@ -301,7 +318,7 @@ function Concept() {
               transition={spring}
               className="grain relative overflow-hidden rounded-3xl bg-[#F4EEE1] p-4 shadow-juicy ring-1 ring-black/5"
             >
-              <img src="/assets/tenders.png" alt="Tenders maison" loading="lazy" className="aspect-[5/4] w-full rounded-2xl object-cover" />
+              <img src="/assets/menu-tenders-cheddar-drop.png" alt="Tenders maison" loading="lazy" className="aspect-[5/4] w-full rounded-2xl object-cover" />
               <div className="absolute left-6 top-6"><MaisonBadge /></div>
             </motion.div>
           </div>
@@ -445,10 +462,6 @@ function Menu() {
    LIVRAISON
 ───────────────────────────────────────────── */
 function Livraison() {
-  const partners = [
-    { name: "Uber Eats", tag: "Livraison rapide",  grad: "from-[#06C167] to-[#0A8E4A]", logo: "/assets/uber-eats-logo.svg", logoAlt: "Logo officiel Uber Eats" },
-    { name: "Deliveroo", tag: "Livraison premium", grad: "from-[#00CCBC] to-[#008F85]", logo: "/assets/deliveroo-logo.svg", logoAlt: "Logo officiel Deliveroo" },
-  ];
   return (
     <section id="livraison" className="relative py-20 md:py-28">
       <div className="mx-auto w-[min(94%,1180px)]">
@@ -465,7 +478,7 @@ function Livraison() {
           </Reveal>
         </div>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-          {partners.map((p, i) => (
+          {DELIVERY_PARTNERS.map((p, i) => (
             <motion.a
               key={p.name}
               href="#"
@@ -555,7 +568,7 @@ function Footer() {
             Réseaux
           </h3>
           <ul className="mt-4 space-y-2.5">
-            {SOCIALS.map((s) => (
+            {SOCIAL_LINKS.map((s) => (
               <li key={s.name}>
                 <motion.a
                   href="#"
