@@ -611,7 +611,7 @@ function Concept() {
               { k: "24h",     v: "de marinade"  },
               { k: "100%",    v: "maison"       },
               { k: "7j/7",    v: "croustillant" },
-              { k: "Orléans", v: "depuis 2024"  },
+              { k: "Avril 2026", v: "ouverture" },
             ].map((s, i) => (
               <Reveal key={s.k} delay={0.12 + i * 0.05}>
                 <motion.div
@@ -842,7 +842,7 @@ function Footer() {
         <div>
           <h3 className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "#EAB308" }}>Adresse</h3>
           <p className="mt-3 text-sm leading-relaxed" style={{ color: "rgba(253,251,247,0.85)" }}>
-            12 rue Jeanne d'Arc<br />45000 Orléans
+            41 place du Châtelet<br />Orléans
           </p>
           <h3 className="mt-7 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "#EAB308" }}>Horaires</h3>
           <ul className="mt-3 space-y-1.5 text-sm" style={{ color: "rgba(253,251,247,0.85)" }}>
