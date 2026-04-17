@@ -23,19 +23,26 @@
   text-rendering: optimizeLegibility;
 }
 
-html,
-body,
-#root {
-  margin: 0;
-  padding: 0;
-  background: var(--color-cream);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
+html {
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  /* Reserve space for mobile bottom bar */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  background: var(--color-cream);
 }
 
 /* Magnetic button glow */
@@ -79,7 +86,7 @@ body {
   border-radius: inherit;
 }
 
-/* Marquee */
+/* Marquee — pauses when user prefers reduced motion */
 @keyframes marquee {
   from { transform: translate3d(0, 0, 0); }
   to   { transform: translate3d(-50%, 0, 0); }
@@ -87,6 +94,18 @@ body {
 .marquee-track {
   animation: marquee 28s linear infinite;
   will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* Hide scrollbar on mobile carousel */
+.hide-scrollbar { scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Mobile safe-area bottom padding for fixed bars */
+.pb-safe {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
 }
 
 /* Floating hero */
